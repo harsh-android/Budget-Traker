@@ -5,5 +5,5 @@ data class TransData(
     var amount:Int = 0,
     var category:String,
     var note:String,
-    var isExpense:Boolean
+    var isExpense:Int = 0
 )

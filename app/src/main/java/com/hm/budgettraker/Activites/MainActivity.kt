@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import com.hm.budgettraker.Fragments.AddFragment
 import com.hm.budgettraker.Fragments.HomeFragment
+import com.hm.budgettraker.Fragments.TransactionFragment
 import com.hm.budgettraker.R
 import com.hm.budgettraker.databinding.ActivityMainBinding
 import nl.joery.animatedbottombar.AnimatedBottomBar
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
                 when(newIndex) {
                     0-> loadFragment(HomeFragment())
                     1-> loadFragment(AddFragment())
+                    2-> loadFragment(TransactionFragment())
                     else->loadFragment(HomeFragment())
 
                 }

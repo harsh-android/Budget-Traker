@@ -20,7 +20,7 @@ class AddFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    var isExpense = true
+    var isExpense = 0
     lateinit var databaseHelper: DatabaseHelper
     lateinit var binding: FragmentAddBinding
 
@@ -48,11 +48,11 @@ class AddFragment : Fragment() {
 
         binding.switcher.setOnCheckedChangedListener { checked ->
             if (checked) {
-                isExpense = false
+                isExpense = 1
                 binding.txtTitle.text = "Add Income"
                 binding.btnText.text = "Add Income"
             } else {
-                isExpense = true
+                isExpense = 0
                 binding.txtTitle.text = "Add Expense"
                 binding.btnText.text = "Add Expense"
             }

@@ -11,8 +11,8 @@
 
     <com.sigma.niceswitch.NiceSwitch
         android:id="@+id/switcher"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_30sdp"
         android:checked="false"
         android:layout_gravity="center" />
 
