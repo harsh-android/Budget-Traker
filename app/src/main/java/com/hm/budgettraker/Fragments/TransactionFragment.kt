@@ -25,7 +25,7 @@ class TransactionFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var binding: FragmentTransactionBinding
-    var adapter = TransactionAdapter()
+    lateinit var adapter : TransactionAdapter
     lateinit var click: TransListClick
     lateinit var dbHelper: DatabaseHelper
 
@@ -64,6 +64,11 @@ class TransactionFragment : Fragment() {
 
         }
 
+        adapter = TransactionAdapter({
+
+        },{
+
+        })
 
         binding.rcvTransactionList.adapter = adapter
         adapter.updateData(dbHelper.getTransaction(), click)
@@ -100,6 +105,7 @@ class TransactionFragment : Fragment() {
             if (dbHelper.updateIncomeExpense(data)) {
                 Toast.makeText(context, "Data Update Success", Toast.LENGTH_SHORT).show()
                 adapter.updateData(dbHelper.getTransaction(), click)
+                dialog.dismiss()
             } else {
                 Toast.makeText(context, "Data Update Failed", Toast.LENGTH_SHORT).show()
             }

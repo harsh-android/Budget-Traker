@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="@dimen/_5sdp"
+    android:id="@+id/mainCard"
+    app:cardBackgroundColor="#FFCDD2"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="@dimen/_10sdp"
     android:orientation="vertical"
@@ -60,7 +62,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:padding="@dimen/_3sdp"
                 android:src="@drawable/ic_edit"
-                app:tint="#32AE89" />
+                app:tint="#3F51B5" />
 
             <ImageView
                 android:id="@+id/imgDelete"

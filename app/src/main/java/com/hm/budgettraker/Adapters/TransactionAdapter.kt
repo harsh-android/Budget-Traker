@@ -1,5 +1,6 @@
 package com.hm.budgettraker.Adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -8,7 +9,7 @@ import com.hm.budgettraker.AdapterClicks.TransListClick
 import com.hm.budgettraker.Models.TransData
 import com.hm.budgettraker.databinding.TransationItemBinding
 
-class TransactionAdapter : Adapter<TransactionAdapter.TransactionHolder>() {
+class TransactionAdapter(var onedit : (()->Unit),var delete : (() -> Unit)) : Adapter<TransactionAdapter.TransactionHolder>() {
 
     var transactionList = ArrayList<TransData>()
     lateinit var click : TransListClick
@@ -38,12 +39,23 @@ class TransactionAdapter : Adapter<TransactionAdapter.TransactionHolder>() {
                     txtAmount.text = amount.toString()
                     txtDescription.text = note
 
+                    if (isExpense == 1) {
+                        mainCard.setCardBackgroundColor(Color.parseColor("#C8E6C9"))
+                    } else {
+                        mainCard.setCardBackgroundColor(Color.parseColor("#FFCDD2"))
+
+                    }
+
                 }
+
+
+
                 imgEdit.setOnClickListener {
                     click.update(transactionList.get(position))
                 }
 
                 imgDelete.setOnClickListener {
+                    onedit.invoke()
                     click.delete(transactionList.get(position))
                 }
 
