@@ -1,6 +1,5 @@
 package com.hm.budgettraker.Fragments
 
-import android.database.sqlite.SQLiteOpenHelper
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.hm.budgettraker.Database.DatabaseHelper
 import com.hm.budgettraker.Models.TransData
-import com.hm.budgettraker.R
 import com.hm.budgettraker.databinding.FragmentAddBinding
 
 private const val ARG_PARAM1 = "param1"
@@ -65,7 +63,7 @@ class AddFragment : Fragment() {
 
             var data = TransData(0,amt,category, note, isExpense)
 
-            if (databaseHelper.AddIncomeExpense(data)) {
+            if (databaseHelper.addIncomeExpense(data)) {
                 Toast.makeText(context, "Data Inserted Success", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, "Data Insert Failed", Toast.LENGTH_SHORT).show()

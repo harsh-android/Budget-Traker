@@ -20,7 +20,7 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, "Budget.db",
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
     }
 
-    fun AddIncomeExpense(transData: TransData): Boolean {
+    fun addIncomeExpense(transData: TransData): Boolean {
         var value = ContentValues().apply {
             put("amount", transData.amount)
             put("category", transData.category)
@@ -29,6 +29,24 @@ class DatabaseHelper(context: Context?) : SQLiteOpenHelper(context, "Budget.db",
         }
         var db = writableDatabase
         var iss: Int = db.insert("$TABLE_NAME", null, value).toInt()
+        return iss != -1
+    }
+
+    fun updateIncomeExpense(transData: TransData): Boolean {
+        var value = ContentValues().apply {
+            put("amount", transData.amount)
+            put("category", transData.category)
+            put("note", transData.note)
+            put("isexpense", transData.isExpense)
+        }
+        var db = writableDatabase
+        var iss: Int = db.update("$TABLE_NAME", value,"id=${transData.id}",null).toInt()
+        return iss != -1
+    }
+
+    fun deleteTransaction(id: Int): Boolean {
+        var db = writableDatabase
+        var iss: Int = db.delete("$TABLE_NAME","id=$id",null)
         return iss != -1
     }
 

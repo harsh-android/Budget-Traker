@@ -38,12 +38,16 @@ class TransactionAdapter : Adapter<TransactionAdapter.TransactionHolder>() {
 
                 }
             }
+            itemView.setOnClickListener {
+
+            }
         }
 
     }
 
-    fun addData(transaction: ArrayList<TransData>) {
-        this.transactionList = transactionList
+    fun updateData(transaction: ArrayList<TransData>) {
+        this.transactionList = transaction
+        notifyDataSetChanged()
     }
 
 }
