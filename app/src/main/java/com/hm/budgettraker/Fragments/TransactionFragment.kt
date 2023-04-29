@@ -26,7 +26,7 @@ class TransactionFragment : Fragment() {
     private var param2: String? = null
     lateinit var binding: FragmentTransactionBinding
     var adapter = TransactionAdapter()
-
+    lateinit var click: TransListClick
     lateinit var dbHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +53,7 @@ class TransactionFragment : Fragment() {
         dbHelper = DatabaseHelper(context)
         binding.rcvTransactionList.layoutManager = LinearLayoutManager(context)
 
-        var click = object : TransListClick{
+        click = object : TransListClick {
             override fun update(transData: TransData) {
                 updateData(transData)
             }
@@ -66,15 +66,15 @@ class TransactionFragment : Fragment() {
 
 
         binding.rcvTransactionList.adapter = adapter
-        adapter.updateData(dbHelper.getTransaction())
+        adapter.updateData(dbHelper.getTransaction(), click)
 
-        Toast.makeText(context, ""+dbHelper.getTransaction().size, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "" + dbHelper.getTransaction().size, Toast.LENGTH_SHORT).show()
 
     }
 
     private fun deleteData(id: Int) {
         if (dbHelper.deleteTransaction(id)) {
-            adapter.updateData(dbHelper.getTransaction())
+            adapter.updateData(dbHelper.getTransaction(), click)
         }
     }
 
@@ -83,7 +83,7 @@ class TransactionFragment : Fragment() {
 
         var dialog = Dialog(context!!)
         dialog.window?.setBackgroundDrawable(ColorDrawable(android.R.color.transparent))
-        var bind = UpdateTransDialogBinding.inflate(LayoutInflater.from(context),null,false)
+        var bind = UpdateTransDialogBinding.inflate(LayoutInflater.from(context), null, false)
         dialog.setContentView(bind.root)
 
         bind.edtAmount.setText(transData.amount.toString())
@@ -95,11 +95,11 @@ class TransactionFragment : Fragment() {
             var category = bind.edtCategory.text.toString()
             var note = bind.edtNote.text.toString()
 
-            var data = TransData(transData.id,amt,category, note, transData.isExpense)
+            var data = TransData(transData.id, amt, category, note, transData.isExpense)
 
             if (dbHelper.updateIncomeExpense(data)) {
                 Toast.makeText(context, "Data Update Success", Toast.LENGTH_SHORT).show()
-                adapter.updateData(dbHelper.getTransaction())
+                adapter.updateData(dbHelper.getTransaction(), click)
             } else {
                 Toast.makeText(context, "Data Update Failed", Toast.LENGTH_SHORT).show()
             }
